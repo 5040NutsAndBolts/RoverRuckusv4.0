@@ -27,7 +27,7 @@ public class MecanumDrive {
      * @param sideways - the sideways value input
      * @param rotation - the rotation value input
      */
-    public void MecanumDrive(double forward, double sideways, double rotation) {
+    public void drive(double forward, double sideways, double rotation) {
         //adds all the inputs together to get the number to scale it by
         double scale = abs(rotation) + abs(forward) + abs(sideways);
 
@@ -45,6 +45,4 @@ public class MecanumDrive {
         //Left Front = +Speed + Turn - Strafe      Right Front = +Speed - Turn + Strafe
         //Left Rear  = +Speed + Turn + Strafe      Right Rear  = +Speed - Turn - Strafe
     }
-
-
 }
