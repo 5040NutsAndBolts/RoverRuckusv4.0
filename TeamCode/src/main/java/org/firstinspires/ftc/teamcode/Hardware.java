@@ -16,6 +16,7 @@ public class Hardware {
 
     HardwareMap hwMap;
 
+    //drive train motors
     public DcMotor leftDriveFront = null;
     public DcMotor rightDriveFront = null;
     public DcMotor leftDriveRear = null;
@@ -38,11 +39,12 @@ public class Hardware {
         // Save reference to Hardware map
         hwMap = ahwMap;
 
+        //drive train motor setup
         leftDriveFront = hwMap.dcMotor.get("leftDriveFront");
         leftDriveRear = hwMap.dcMotor.get("leftDriveRear");
         rightDriveFront = hwMap.dcMotor.get("rightDriveFront");
         rightDriveRear = hwMap.dcMotor.get("rightDriveRear");
-
+        //reversing the right side motors
         rightDriveFront.setDirection(DcMotor.Direction.REVERSE);
         rightDriveRear.setDirection(DcMotor.Direction.REVERSE);
     }

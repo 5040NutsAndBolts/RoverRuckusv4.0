@@ -7,14 +7,26 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 import static java.lang.Math.abs;
 
+/**
+ * Class is for the mecanum drive code
+ */
 public class MecanumDrive {
 
     private Hardware robot;
 
+    /**
+     * constructor to set up the hardware object
+     */
     public MecanumDrive(){
         robot = new Hardware();
     }
 
+    /**
+     * this method is for driving the mecanum with the three inputs
+     * @param forward - the forward value input
+     * @param sideways - the sideways value input
+     * @param rotation - the rotation value input
+     */
     public void MecanumDrive(double forward, double sideways, double rotation) {
         //adds all the inputs together to get the number to scale it by
         double scale = abs(rotation) + abs(forward) + abs(sideways);
