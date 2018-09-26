@@ -25,8 +25,13 @@ public class Teleop extends OpMode {
         //inputs
         double leftStickY1 = gamepad1.left_stick_y;
         double leftStickX1 = gamepad1.left_stick_x;
-        double rightStickX1 = -gamepad1.right_stick_x;
+        double rightStickX1 = gamepad1.right_stick_x;
 
-        driveTrain.drive(leftStickY1, leftStickX1, rightStickX1);
+        driveTrain.drive(leftStickY1, leftStickX1, rightStickX1, robot);
+
+        telemetry.addData("front left drive", robot.leftDriveFront.getPower());
+        telemetry.addData("rear left drive", robot.leftDriveRear.getPower());
+        telemetry.addData("front right drive", robot.rightDriveFront.getPower());
+        telemetry.addData("rear right drive", robot.rightDriveRear.getPower());
     }
 }

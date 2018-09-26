@@ -12,13 +12,10 @@ import static java.lang.Math.abs;
  */
 public class MecanumDrive {
 
-    private Hardware robot;
-
     /**
      * constructor to set up the hardware object
      */
     public MecanumDrive(){
-        robot = new Hardware();
     }
 
     /**
@@ -27,7 +24,7 @@ public class MecanumDrive {
      * @param sideways - the sideways value input
      * @param rotation - the rotation value input
      */
-    public void drive(double forward, double sideways, double rotation) {
+    public void drive(double forward, double sideways, double rotation, Hardware robot) {
         //adds all the inputs together to get the number to scale it by
         double scale = abs(rotation) + abs(forward) + abs(sideways);
 
@@ -38,10 +35,10 @@ public class MecanumDrive {
             sideways /= scale;
         }
         //setting the motor powers to move
-        robot.leftDriveFront.setPower(forward+rotation-sideways);
-        robot.leftDriveRear.setPower(forward+rotation+sideways);
-        robot.rightDriveFront.setPower(forward-rotation+sideways);
-        robot.rightDriveRear.setPower(forward-rotation-sideways);
+        robot.leftDriveFront.setPower(forward-rotation-sideways);
+        robot.leftDriveRear.setPower(forward-rotation+sideways);
+        robot.rightDriveFront.setPower(forward+rotation+sideways);
+        robot.rightDriveRear.setPower(forward+rotation-sideways);
         //Left Front = +Speed + Turn - Strafe      Right Front = +Speed - Turn + Strafe
         //Left Rear  = +Speed + Turn + Strafe      Right Rear  = +Speed - Turn - Strafe
     }
