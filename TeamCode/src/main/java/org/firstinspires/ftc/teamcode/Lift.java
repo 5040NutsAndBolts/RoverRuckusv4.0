@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 @TeleOp(name="lifter", group="lifter")
-public class prototype1 extends OpMode
+public class Lift extends OpMode
 {
 
     private Hardware robot = null;
