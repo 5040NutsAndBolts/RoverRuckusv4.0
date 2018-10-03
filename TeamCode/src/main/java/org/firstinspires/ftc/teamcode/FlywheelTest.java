@@ -9,45 +9,43 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 @TeleOp(name="Flywheel Test", group="Linear Opmode")
 public class FlywheelTest extends OpMode {
-    Servo paddle = null;
+    Servo mineralDiverter = null;
     DcMotor wheelSpinnerClkWise = null;
     DcMotor wheelSpinnerCoClWise = null;
-    ColorSensor iBaller = null;
+    ColorSensor mineralColorSensor = null;
 
-    // Green value on the color sensor for gold
+    // Max green value on the color sensor for gold
     private final double GOLD_COLOR_VAL = 100;
-    // Positions for the paddle servo
+    // Positions for the mineral diverter servo
     private final float GOLD_POS = 0;
     private final float SILV_POS = .25f;
-    // Color sensor value holder
+    // Color sensor value holders
     private float hsvValues[] = {0f, 0f, 0f};
 
     @Override
     public void init(){
-        //linActuator = hardwareMap.servo.get("armExtension");
-        //linActuator.setPosition(0);
         wheelSpinnerCoClWise = hardwareMap.dcMotor.get("flySpinA");
         wheelSpinnerClkWise = hardwareMap.dcMotor.get("flySpinB");
-        iBaller = hardwareMap.get(ColorSensor.class,"colorSensor");
-        paddle = hardwareMap.servo.get("paddleServo");
+        mineralColorSensor = hardwareMap.get(ColorSensor.class,"colorSensor");
+        mineralDiverter = hardwareMap.servo.get("paddleServo");
     }
 
     @Override
     public void loop(){
         // Setup stuff
-        wheelSpinnerCoClWise.setPower(0);
-        wheelSpinnerClkWise.setPower(0);
-        Color.RGBToHSV((int) (iBaller.red() * 255),
-                (int) (iBaller.green() * 255),
-                (int) (iBaller.blue() * 255),
+        wheelSpinnerCoClWise.setPower(1);
+        wheelSpinnerClkWise.setPower(1);
+        Color.RGBToHSV((mineralColorSensor.red() * 255),
+                (mineralColorSensor.green() * 255),
+                (mineralColorSensor.blue() * 255),
                 hsvValues);
         // Changes based on color sensor
-        if (iBaller.blue() <= GOLD_COLOR_VAL) {
+        if (mineralColorSensor.blue() <= GOLD_COLOR_VAL) {
             telemetry.addLine("Gold");
-            paddle.setPosition(GOLD_POS);
+            mineralDiverter.setPosition(GOLD_POS);
         } else {
             telemetry.addLine("Not Gold");
-            paddle.setPosition(SILV_POS);
+            mineralDiverter.setPosition(SILV_POS);
         }
         telemetry.update();
     }
