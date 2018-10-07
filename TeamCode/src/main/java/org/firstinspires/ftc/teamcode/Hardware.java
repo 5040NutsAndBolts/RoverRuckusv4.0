@@ -45,6 +45,8 @@ public class Hardware {
 
         hangingMotor = hwMap.dcMotor.get("hangMotor");
 
+        //hangingMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+
         hangingMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         hangingMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 

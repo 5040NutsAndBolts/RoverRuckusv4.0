@@ -6,7 +6,7 @@ public class LiftMechanism {
 
         if(up) {
             robot.hangingMotor.setPower(1);
-            robot.hangingMotor.setTargetPosition(3100);
+            robot.hangingMotor.setTargetPosition(4800);
         }
         else if(down) {
             robot.hangingMotor.setPower(0.5);
