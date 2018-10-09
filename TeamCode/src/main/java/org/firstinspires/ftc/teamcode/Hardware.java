@@ -1,6 +1,8 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
 
 
 /**
@@ -13,6 +15,9 @@ public class Hardware {
     public static final String MESSAGETAG = "5040MSG";
 
     HardwareMap hwMap;
+
+    public DcMotor depositMotor = null;
+    public Servo mineralBar = null;
 
     /**
      * Constructor to set up the Hardwaremap
@@ -30,5 +35,7 @@ public class Hardware {
     public void init(HardwareMap ahwMap, boolean auto) {
         // Save reference to Hardware map
         hwMap = ahwMap;
+        depositMotor = hwMap.dcMotor.get("depositMotor");
+        mineralBar = hwMap.servo.get("mineralBar");
     }
 }
