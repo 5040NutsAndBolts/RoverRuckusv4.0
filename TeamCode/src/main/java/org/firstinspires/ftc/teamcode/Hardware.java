@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -22,6 +23,8 @@ public class Hardware {
     public DcMotor leftDriveRear = null;
     public DcMotor rightDriveRear = null;
 
+    public BNO055IMU imu;
+
     /**
      * Constructor to set up the Hardwaremap
      */
@@ -35,7 +38,7 @@ public class Hardware {
      * @param ahwMap the hardware declaration being passed into this class
      * @param auto boolean to run initializations for auto
      */
-    public void init(HardwareMap ahwMap, boolean auto) {
+    public void init(HardwareMap ahwMap) {
         // Save reference to Hardware map
         hwMap = ahwMap;
 
