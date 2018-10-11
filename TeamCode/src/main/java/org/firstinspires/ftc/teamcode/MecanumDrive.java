@@ -13,16 +13,10 @@ import static java.lang.Math.abs;
 public class MecanumDrive {
 
     /**
-     * constructor to set up the hardware object
-     */
-    public MecanumDrive(){
-    }
-
-    /**
      * this method is for driving the mecanum with the three inputs
-     * @param forward - the forward value input
-     * @param sideways - the sideways value input
-     * @param rotation - the rotation value input
+     * @param forward - The motor power to move forwards by
+     * @param sideways - The motor power to move sideways by
+     * @param rotation - the motor power to rotate by
      */
     public void drive(double forward, double sideways, double rotation, Hardware robot) {
         //adds all the inputs together to get the number to scale it by

@@ -22,13 +22,15 @@ public class Teleop extends OpMode {
 
     @Override
     public void loop() {
-        //inputs
+        // Controller inputs
         double leftStickY1 = gamepad1.left_stick_y;
         double leftStickX1 = gamepad1.left_stick_x;
         double rightStickX1 = gamepad1.right_stick_x;
 
+        // Drive based on controller inputs
         driveTrain.drive(leftStickY1, leftStickX1, rightStickX1, robot);
 
+        // Print Debug information on the phones
         telemetry.addData("front left drive", robot.leftDriveFront.getPower());
         telemetry.addData("rear left drive", robot.leftDriveRear.getPower());
         telemetry.addData("front right drive", robot.rightDriveFront.getPower());
