@@ -26,15 +26,6 @@ public class AutoSamples extends AutoMethods {
         //inits the robot hardware
         robot.init(hardwareMap);
 
-        robot.leftDriveFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.leftDriveFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        robot.rightDriveFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.rightDriveFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        robot.leftDriveRear.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.leftDriveRear.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        robot.rightDriveRear.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.rightDriveRear.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
         powerSet(0);
 
         //setup for auto
