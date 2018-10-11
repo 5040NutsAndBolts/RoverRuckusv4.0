@@ -10,7 +10,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 public class AutoSamples extends AutoMethods {
 
-    ElapsedTime runtime = new ElapsedTime();
+    private ElapsedTime runtime = new ElapsedTime();
     private GoldAlignDetector detector;
     private Hardware robot;
     private MecanumDrive driveTrain;
