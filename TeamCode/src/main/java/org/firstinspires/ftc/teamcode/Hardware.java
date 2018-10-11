@@ -23,8 +23,6 @@ public class Hardware {
     public DcMotor leftDriveRear = null;
     public DcMotor rightDriveRear = null;
 
-    public BNO055IMU imu;
-
     /**
      * Constructor to set up the Hardwaremap
      */
@@ -36,7 +34,6 @@ public class Hardware {
      *Method for initializing all the hardware components.
      *Use at the beginning of code initialization
      * @param ahwMap the hardware declaration being passed into this class
-     * @param auto boolean to run initializations for auto
      */
     public void init(HardwareMap ahwMap) {
         // Save reference to Hardware map
