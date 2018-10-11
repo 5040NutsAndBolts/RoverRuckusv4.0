@@ -13,12 +13,6 @@ import static java.lang.Math.abs;
 public class MecanumDrive {
 
     /**
-     * constructor to set up the hardware object
-     */
-    public MecanumDrive(){
-    }
-
-    /**
      * this method is for driving the mecanum with the three inputs
      * @param forward - the forward value input
      * @param sideways - the sideways value input
