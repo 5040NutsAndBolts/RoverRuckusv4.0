@@ -50,13 +50,5 @@ public class Hardware {
         //reversing the right side motors
         rightDriveFront.setDirection(DcMotor.Direction.REVERSE);
         rightDriveRear.setDirection(DcMotor.Direction.REVERSE);
-        leftDriveFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        leftDriveFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        rightDriveFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        rightDriveFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        leftDriveRear.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        leftDriveRear.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        rightDriveRear.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        rightDriveRear.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 }
