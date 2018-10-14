@@ -23,6 +23,8 @@ public class Hardware {
     public DcMotor leftDriveRear = null;
     public DcMotor rightDriveRear = null;
 
+    BNO055IMU gyro;
+
     /**
      * Constructor to set up the Hardwaremap
      */
@@ -47,5 +49,6 @@ public class Hardware {
         //reversing the right side motors
         rightDriveFront.setDirection(DcMotor.Direction.REVERSE);
         rightDriveRear.setDirection(DcMotor.Direction.REVERSE);
+
     }
 }
