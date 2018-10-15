@@ -87,19 +87,26 @@ class AutoMethods extends LinearOpMode {
      * @param sInches inches sideways - positive is to the left
      * @param  robot harware reference for the motors
      */
-    public void distanceInch(int fInches,int sInches, Hardware robot) {
+    public void forwardInch(int fInches,int sInches, Hardware robot) {
         int fPos = fInches*87;
-        int sPos = 0;
-
-        if(fPos == 0)
-            sPos = sInches*129;
 
         resetMotors(robot);
 
-        robot.leftDriveFront.setTargetPosition(fPos-sPos);
-        robot.leftDriveRear.setTargetPosition(fPos+sPos);
-        robot.rightDriveFront.setTargetPosition(fPos+sPos);
-        robot.rightDriveRear.setTargetPosition(fPos-sPos);
+        robot.leftDriveFront.setTargetPosition(fPos);
+        robot.leftDriveRear.setTargetPosition(fPos);
+        robot.rightDriveFront.setTargetPosition(fPos);
+        robot.rightDriveRear.setTargetPosition(fPos);
+    }
+
+    public void sidewaysInch(int sInches, Hardware robot) {
+        int sPos = sInches*129;
+
+        resetMotors(robot);
+
+        robot.leftDriveFront.setTargetPosition(-sPos);
+        robot.leftDriveRear.setTargetPosition(sPos);
+        robot.rightDriveFront.setTargetPosition(sPos);
+        robot.rightDriveRear.setTargetPosition(-sPos);
     }
 
     public void rotate(int degrees, Hardware robot) {
