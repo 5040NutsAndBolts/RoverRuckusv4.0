@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
 
 
 /**
@@ -25,6 +26,8 @@ public class Hardware {
 
     public DcMotor hangingMotor = null;
 
+    public Servo hangLock = null;
+
     /**
      * Constructor to set up the Hardwaremap
      */
@@ -42,6 +45,7 @@ public class Hardware {
         // Save reference to Hardware map
         hwMap = ahwMap;
 
+        hangLock = hwMap.servo.get("hangLock");
 
         hangingMotor = hwMap.dcMotor.get("hangMotor");
 

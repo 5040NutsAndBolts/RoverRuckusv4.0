@@ -12,13 +12,19 @@ import static java.lang.Math.abs;
  */
 public class MecanumDrive {
 
+    Hardware robot;
+
+    MecanumDrive(Hardware r) {
+        robot = r;
+    }
+
     /**
      * this method is for driving the mecanum with the three inputs
      * @param forward - the forward value input
      * @param sideways - the sideways value input
      * @param rotation - the rotation value input
      */
-    public void drive(double forward, double sideways, double rotation, Hardware robot) {
+    public void drive(double forward, double sideways, double rotation) {
         //adds all the inputs together to get the number to scale it by
         double scale = abs(rotation) + abs(forward) + abs(sideways);
 
