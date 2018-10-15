@@ -22,12 +22,20 @@ public class Teleop extends OpMode {
 
     @Override
     public void loop() {
-        boolean rightTrigger = gamepad1.right_bumper;
-        boolean leftTrigger = gamepad1.left_bumper;
+        // gets values from gamepad 1
+        boolean rightTrigger = gamepad1.right_trigger > 0;
+        boolean leftTrigger = gamepad1.left_trigger > 0;
         boolean gamepadX = gamepad1.x;
         boolean gamepadB = gamepad1.b;
 
-        //mineralScorer.depositerArm(rightTrigger, leftTrigger, robot);
-        mineralScorer.mineralDropBar(gamepadX, gamepadB, robot);
+        mineralScorer.extendingArm(rightTrigger, leftTrigger, robot);
+        mineralScorer.mineralBlocker(gamepadX, gamepadB, robot);
+
+        telemetry.addLine("-----EXTENDING ARM-----");
+        telemetry.addData("Arm motor position", robot.depositMotor.getCurrentPosition());
+        telemetry.addData("Arm motor power", robot.depositMotor.getPower());
+        telemetry.addLine("-----MINERAL DROP BAR-----");
+        telemetry.addData("Bar position", robot.blockingBar.getPosition());
+        telemetry.update();
     }
 }

@@ -17,7 +17,7 @@ public class Hardware {
     HardwareMap hwMap;
 
     public DcMotor depositMotor = null;
-    public Servo mineralBar = null;
+    public Servo blockingBar = null;
 
     /**
      * Constructor to set up the Hardwaremap
@@ -36,6 +36,6 @@ public class Hardware {
         // Save reference to Hardware map
         hwMap = ahwMap;
         depositMotor = hwMap.dcMotor.get("depositMotor");
-        mineralBar = hwMap.servo.get("mineralBar");
+        blockingBar = hwMap.servo.get("blockingBar");
     }
 }
