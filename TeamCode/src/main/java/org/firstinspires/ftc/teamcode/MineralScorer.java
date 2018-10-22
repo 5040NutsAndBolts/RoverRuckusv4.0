@@ -28,15 +28,18 @@ public class MineralScorer{
 
     /**
      * this method controls the bar that blocks minerals from falling into the lander
-     * @param gold - value for deciding if bar needs to move to drop gold only
-     * @param silver - value for deciding if bar needs to move to drop all minerals
+     * @param open - value for deciding if bar needs to move open
      */
-    public void mineralBlocker(boolean gold, boolean silver, Hardware robot){
-        if (gold) // while holding down the button to drop only gold, move the bar to that position
-            robot.blockingBar.setPosition(25);
-        else if (silver) // while holding down the button to drop all minerals, open the bar completely
-            robot.blockingBar.setPosition(50);
-        else // if not holding down either of the buttons, set the bar to the closed position
+    public void mineralDropper(boolean open, Hardware robot){
+        // If open, decide how far to open, else move to close position
+        if (open){
+            // Two color sensors, if at least one is gold, move to gold, else move to silver
+            if (robot.rightColorSens.blue() <= 400 ||
+                    robot.leftColorSens.blue() <= 400) // if gold
+                robot.blockingBar.setPosition(25);
+            else
+                robot.blockingBar.setPosition(50);
+        } else
             robot.blockingBar.setPosition(0);
     }
 }

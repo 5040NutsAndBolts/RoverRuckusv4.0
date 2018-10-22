@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-@TeleOp(name="MJ's test", group="Teleop")
+@TeleOp(name="Mineral Scoring", group="Teleop")
 
 public class Teleop extends OpMode {
 
@@ -23,13 +23,11 @@ public class Teleop extends OpMode {
     @Override
     public void loop() {
         // gets values from gamepad 1
-        boolean rightTrigger = gamepad1.right_trigger > 0;
-        boolean leftTrigger = gamepad1.left_trigger > 0;
-        boolean gamepadX = gamepad1.x;
-        boolean gamepadB = gamepad1.b;
+        boolean rightTriggerPulled = gamepad1.right_trigger > 0;
+        boolean leftTriggerPulled = gamepad1.left_trigger > 0;
 
-        mineralScorer.extendingArm(rightTrigger, leftTrigger, robot);
-        mineralScorer.mineralBlocker(gamepadX, gamepadB, robot);
+        mineralScorer.extendingArm(rightTriggerPulled, leftTriggerPulled, robot);
+        mineralScorer.mineralDropper(gamepad1.a, robot);
 
         telemetry.addLine("-----EXTENDING ARM-----");
         telemetry.addData("Arm motor position", robot.depositMotor.getCurrentPosition());

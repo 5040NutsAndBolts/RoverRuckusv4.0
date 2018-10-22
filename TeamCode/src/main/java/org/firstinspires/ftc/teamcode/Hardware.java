@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -18,6 +19,8 @@ public class Hardware {
 
     public DcMotor depositMotor = null;
     public Servo blockingBar = null;
+    public ColorSensor leftColorSens;
+    public ColorSensor rightColorSens;
 
     /**
      * Constructor to set up the Hardwaremap
@@ -37,5 +40,7 @@ public class Hardware {
         hwMap = ahwMap;
         depositMotor = hwMap.dcMotor.get("depositMotor");
         blockingBar = hwMap.servo.get("blockingBar");
+        leftColorSens = hwMap.colorSensor.get("leftColorSens");
+        rightColorSens = hwMap.colorSensor.get("rightColorSens");
     }
 }
