@@ -7,17 +7,28 @@ import com.qualcomm.robotcore.hardware.ColorSensor;
 
 @TeleOp(name="Color Sensor Test", group="Linear Opmode")
 public class ColorSensorTesting extends LinearOpMode{
-    ColorSensor iBaller = null;
+    ColorSensor colorSensL = null;
+    ColorSensor colorSensR = null;
 
     public void runOpMode(){
-        iBaller = hardwareMap.get(ColorSensor.class,"colorSensor");
+        colorSensL = hardwareMap.get(ColorSensor.class,"colorSensorL");
+        colorSensR = hardwareMap.get(ColorSensor.class,"colorSensorR");
 
         waitForStart();
         while(opModeIsActive()) {
-            iBaller.enableLed(true);
-            telemetry.addLine("Red Value: " + iBaller.red());
-            telemetry.addLine("Blue Value: " + iBaller.blue());
-            telemetry.addLine("Green Value: " + iBaller.green());
+            telemetry.addLine("-----Left Color Sensor-----");
+            telemetry.addData("Red: ", colorSensL.red());
+            telemetry.addData("Green: ", colorSensL.green());
+            telemetry.addData("Blue: ", colorSensL.blue());
+            telemetry.addLine("-----Right Color Sensor-----");
+            telemetry.addData("Red: ", colorSensR.red());
+            telemetry.addData("Green: ", colorSensR.green());
+            telemetry.addData("Blue: ", colorSensR.blue());
+
+            if (colorSensL.blue() <= 500 || colorSensR.blue() <= 500)
+                telemetry.addLine("Gold!");
+            else
+                telemetry.addLine("Silver!");
             telemetry.update();
         }
     }
