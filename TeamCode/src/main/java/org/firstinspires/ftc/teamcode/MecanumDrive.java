@@ -25,6 +25,7 @@ public class MecanumDrive {
      * @param rotation - the rotation value input
      */
     public void drive(double forward, double sideways, double rotation) {
+
         //adds all the inputs together to get the number to scale it by
         double scale = abs(rotation) + abs(forward) + abs(sideways);
 

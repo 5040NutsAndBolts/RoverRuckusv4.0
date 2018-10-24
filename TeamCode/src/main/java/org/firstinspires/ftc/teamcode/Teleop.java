@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
+
 @TeleOp(name="Teleop", group="Teleop")
 
 public class Teleop extends OpMode {
@@ -21,9 +22,10 @@ public class Teleop extends OpMode {
 
     @Override
     public void init() {
-        robot.init(hardwareMap, false);
+        robot.init(hardwareMap);
         robot.hangingMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.hangingMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        robot.init(hardwareMap);
     }
 
     @Override
