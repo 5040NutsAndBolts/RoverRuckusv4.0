@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
 
 @TeleOp(name="Teleop", group="Teleop")
 
@@ -21,8 +22,8 @@ public class Teleop extends OpMode {
     @Override
     public void init() {
         robot.init(hardwareMap, false);
-
-        robot.hangLock.setPosition(0.75);
+        robot.hangingMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.hangingMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
     @Override
@@ -40,15 +41,12 @@ public class Teleop extends OpMode {
 
         //toggle for locking the hanging mechanism
         if(a1 && !hangPressed) {
-            lifter.lock(true);
             hangPressed = true;
         }
         else if (!a1){
             hangPressed = false;
         }
 
-
-        telemetry.addData("Lock servo", robot.hangLock.getPosition());
         telemetry.addLine("-------DRIVE MOTORS-------");
         telemetry.addData("front left drive", robot.leftDriveFront.getPower());
         telemetry.addData("rear left drive", robot.leftDriveRear.getPower());

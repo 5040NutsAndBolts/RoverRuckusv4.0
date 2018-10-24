@@ -26,8 +26,6 @@ public class Hardware {
 
     public DcMotor hangingMotor = null;
 
-    public Servo hangLock = null;
-
     /**
      * Constructor to set up the Hardwaremap
      */
@@ -45,11 +43,7 @@ public class Hardware {
         // Save reference to Hardware map
         hwMap = ahwMap;
 
-        hangLock = hwMap.servo.get("hangLock");
-
-        hangingMotor = hwMap.dcMotor.get("hangMotor");
-
-        //hangingMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+        hangingMotor = hwMap.dcMotor.get("hangingMotor");
 
         hangingMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         hangingMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
