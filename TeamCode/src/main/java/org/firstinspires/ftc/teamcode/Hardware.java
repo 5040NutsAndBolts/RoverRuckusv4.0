@@ -4,6 +4,7 @@ import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
 
 
 /**
@@ -23,6 +24,8 @@ public class Hardware {
     public DcMotor leftDriveRear = null;
     public DcMotor rightDriveRear = null;
 
+    public DcMotor hangingMotor = null;
+
     /**
      * Constructor to set up the Hardwaremap
      */
@@ -38,6 +41,11 @@ public class Hardware {
     public void init(HardwareMap ahwMap) {
         // Save reference to Hardware map
         hwMap = ahwMap;
+
+        hangingMotor = hwMap.dcMotor.get("hangingMotor");
+
+        hangingMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        hangingMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         //drive train motor setup
         leftDriveFront = hwMap.dcMotor.get("leftDriveFront");
