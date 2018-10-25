@@ -19,7 +19,7 @@ public class AutoPosTesting extends AutoMethods {
     public AutoPosTesting() {
         time = new ElapsedTime();
         robot = new Hardware();
-        driveTrain = new MecanumDrive();
+        driveTrain = new MecanumDrive(robot);
     }
 
     @Override
@@ -33,12 +33,12 @@ public class AutoPosTesting extends AutoMethods {
             telemetry.update();
         }
 
-        powerSet(power, robot);
-        rotate(90,robot);
+        driveTrain.powerSet(power);
+        driveTrain.rotate(90);
 
         while(opModeIsActive()) {
             power += 0.05;
-            powerSet(power, robot);
+            driveTrain.powerSet(power);
 
             telemetry.addData("gyro",robot.gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle);
             telemetry.addData("Left Front Position", robot.leftDriveFront.getCurrentPosition());
