@@ -20,7 +20,6 @@ public class Teleop extends OpMode {
         lifter = new LiftMechanism(robot);
     }
 
-    @Override
     public void init() {
         robot.init(hardwareMap);
         robot.hangingMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -28,7 +27,6 @@ public class Teleop extends OpMode {
         robot.init(hardwareMap);
     }
 
-    @Override
     public void loop() {
         //inputs for controller 1
         double leftStickY1 = gamepad1.left_stick_y;
@@ -36,9 +34,12 @@ public class Teleop extends OpMode {
         double rightStickX1 = gamepad1.right_stick_x;
         boolean leftBumper1 = gamepad1.left_bumper;
         boolean rightBumper1 = gamepad1.right_bumper;
+        boolean dPadDown1 = gamepad1.dpad_down;
         boolean a1 = gamepad1.a;
 
-        lifter.lift(leftBumper1, rightBumper1);
+        lifter.lift(leftBumper1, rightBumper1, dPadDown1);
+        //lifter.resetLift(dPadDown1);
+
         driveTrain.drive(leftStickY1, leftStickX1, rightStickX1);
 
         //toggle for locking the hanging mechanism
