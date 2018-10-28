@@ -7,6 +7,7 @@ import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.navigation.Position;
@@ -22,6 +23,17 @@ class AutoMethods extends LinearOpMode {
 
     }
 
+    public void motorSetupToPos(Hardware robot) {
+        robot.leftDriveFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.leftDriveFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        robot.rightDriveFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.rightDriveFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        robot.leftDriveRear.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.leftDriveRear.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        robot.rightDriveRear.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.rightDriveRear.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+    }
+
     public void gyroSetup(Hardware robot, HardwareMap hwMap) {
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
         parameters.angleUnit           = BNO055IMU.AngleUnit.DEGREES;
@@ -31,9 +43,9 @@ class AutoMethods extends LinearOpMode {
         parameters.loggingTag          = "IMU";
         parameters.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
 
-        robot.imu = hwMap.get(BNO055IMU.class, "imu");
-        robot.imu.initialize(parameters);
-        robot.imu.startAccelerationIntegration(new Position(), new Velocity(), 1000);
+        robot.gyro = hwMap.get(BNO055IMU.class, "imu");
+        robot.gyro.initialize(parameters);
+        robot.gyro.startAccelerationIntegration(new Position(), new Velocity(), 1000);
     }
 
 
@@ -42,16 +54,16 @@ class AutoMethods extends LinearOpMode {
        detector.init(hardwareMap.appContext, CameraViewDisplay.getInstance());
        detector.useDefaults();*/
 
-       // Optional Tuning
-       detector.alignSize = 50; // How wide (in pixels) is the range in which the gold object will be aligned. (Represented by green bars in the preview)
-       detector.alignPosOffset = 0; // How far from center frame to offset this alignment zone.
-       detector.downscale = 0.4; // How much to downscale the input frames
+        // Optional Tuning
+        detector.alignSize = 50; // How wide (in pixels) is the range in which the gold object will be aligned. (Represented by green bars in the preview)
+        detector.alignPosOffset = 0; // How far from center frame to offset this alignment zone.
+        detector.downscale = 0.4; // How much to downscale the input frames
 
-       detector.areaScoringMethod = DogeCV.AreaScoringMethod.MAX_AREA; // Can also be PERFECT_AREA
-       //detector.perfectAreaScorer.perfectArea = 10000; // if using PERFECT_AREA scoring
-       detector.maxAreaScorer.weight = 0.005;
+        detector.areaScoringMethod = DogeCV.AreaScoringMethod.MAX_AREA; // Can also be PERFECT_AREA
+        //detector.perfectAreaScorer.perfectArea = 10000; // if using PERFECT_AREA scoring
+        detector.maxAreaScorer.weight = 0.005;
 
-       detector.ratioScorer.weight = 5;
-       detector.ratioScorer.perfectRatio = 1.0;
+        detector.ratioScorer.weight = 5;
+        detector.ratioScorer.perfectRatio = 1.0;
     }
 }

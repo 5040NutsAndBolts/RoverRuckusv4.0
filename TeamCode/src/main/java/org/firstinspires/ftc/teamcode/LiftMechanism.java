@@ -17,6 +17,7 @@ public class LiftMechanism {
 
         if(up) {
             robot.hangingMotor.setPower(1);
+<<<<<<< HEAD
             robot.hangingMotor.setTargetPosition(4750);
         }
         else if(down) {
@@ -44,3 +45,17 @@ public class LiftMechanism {
             robot.hangLock.setPosition(0.75);
     }
 }
+=======
+            robot.hangingMotor.setTargetPosition(7000);
+        }
+        else if(down) {
+            robot.hangingMotor.setPower(1);
+            robot.hangingMotor.setTargetPosition(20);
+        }
+        else {
+            robot.hangingMotor.setTargetPosition(robot.hangingMotor.getCurrentPosition());
+            robot.hangingMotor.setPower(0);
+        }
+    }
+}
+>>>>>>> origin/AutoSampling

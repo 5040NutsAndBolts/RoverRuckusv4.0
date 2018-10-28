@@ -23,7 +23,9 @@ public class Hardware {
     public DcMotor leftDriveRear = null;
     public DcMotor rightDriveRear = null;
 
-    public BNO055IMU imu;
+    public DcMotor hangingMotor = null;
+
+    BNO055IMU gyro;
 
     /**
      * Constructor to set up the Hardwaremap
@@ -41,6 +43,11 @@ public class Hardware {
         // Save reference to Hardware map
         hwMap = ahwMap;
 
+        hangingMotor = hwMap.dcMotor.get("hangingMotor");
+
+        hangingMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        hangingMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
         //drive train motor setup
         leftDriveFront = hwMap.dcMotor.get("leftDriveFront");
         leftDriveRear = hwMap.dcMotor.get("leftDriveRear");
@@ -49,13 +56,6 @@ public class Hardware {
         //reversing the right side motors
         rightDriveFront.setDirection(DcMotor.Direction.REVERSE);
         rightDriveRear.setDirection(DcMotor.Direction.REVERSE);
-        leftDriveFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        leftDriveFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        rightDriveFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        rightDriveFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        leftDriveRear.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        leftDriveRear.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        rightDriveRear.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        rightDriveRear.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
     }
 }
