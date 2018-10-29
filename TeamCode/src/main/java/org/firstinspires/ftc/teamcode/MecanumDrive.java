@@ -14,6 +14,10 @@ public class MecanumDrive {
 
     Hardware robot;
 
+    /**
+     * sets up the hardware refernce so you don't have to pass it as a parameter
+     * @param r - r is the hardware reference from the code
+     */
     MecanumDrive(Hardware r) {
         robot = r;
     }

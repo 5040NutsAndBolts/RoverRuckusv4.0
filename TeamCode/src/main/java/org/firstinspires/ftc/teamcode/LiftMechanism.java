@@ -44,18 +44,4 @@ public class LiftMechanism {
             robot.hangingMotor.setPower(0);
         }
     }
-
-    /*public void resetLift(boolean down) {
-
-        if(down) {
-            robot.hangingMotor.setPower(1);
-            robot.hangingMotor.setTargetPosition(robot.hangingMotor.getCurrentPosition() - 100);
-            downReset = true;
-        }
-        else if(downReset) {
-            robot.hangingMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            robot.hangingMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            downReset = false;
-        }
-    }*/
 }
