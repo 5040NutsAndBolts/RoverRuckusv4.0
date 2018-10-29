@@ -75,6 +75,7 @@ public class Teleop extends OpMode {
         telemetry.addLine("--------COLLECTION SLIDE--------");
         telemetry.addData("collection slide Position", robot.collectionSlide.getCurrentPosition());
         telemetry.addData("collection slide power", robot.collectionSlide.getPower());
+        telemetry.addData("leftStickY2", leftStickY2);
         telemetry.update();
     }
 }

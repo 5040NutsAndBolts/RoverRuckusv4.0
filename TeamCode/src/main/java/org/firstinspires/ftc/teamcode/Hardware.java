@@ -61,13 +61,15 @@ public class Hardware {
         rightDriveFront.setDirection(DcMotor.Direction.REVERSE);
         rightDriveRear.setDirection(DcMotor.Direction.REVERSE);
 
+        //collection motors
         collectionSlide = hwMap.dcMotor.get("collectionSlide");
         wrist = hwMap.dcMotor.get("wrist");
 
+        wrist.setDirection(DcMotor.Direction.REVERSE);
         wrist.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        wrist.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        wrist.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         collectionSlide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        collectionSlide.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        collectionSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         intake = hwMap.crservo.get("intake");
     }
