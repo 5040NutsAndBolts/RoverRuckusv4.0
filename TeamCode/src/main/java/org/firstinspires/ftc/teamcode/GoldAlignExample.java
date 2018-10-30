@@ -42,6 +42,9 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 public class GoldAlignExample extends OpMode
 {
     private GoldAlignDetector detector;
+    private Hardware robot;
+    private MecanumDrive driveTrain;
+    private LiftMechanism lifter;
 
     public GoldAlignExample() {
     }
@@ -68,6 +71,10 @@ public class GoldAlignExample extends OpMode
         detector.ratioScorer.perfectRatio = 1.0;
 
         //detector.enable();
+
+        robot = new Hardware();
+        driveTrain = new MecanumDrive(robot);
+        lifter = new LiftMechanism(robot);
     }
 
     @Override

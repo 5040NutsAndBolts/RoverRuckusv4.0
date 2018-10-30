@@ -25,7 +25,7 @@ public class AutoPosTesting extends AutoMethods {
     @Override
     public void runOpMode() throws InterruptedException {
         robot.init(hardwareMap);
-        gyroSetup(robot, hardwareMap);
+        //gyroSetup(robot, hardwareMap);
         motorSetupToPos(robot);
 
         while (!isStarted() && !isStopRequested()) {
