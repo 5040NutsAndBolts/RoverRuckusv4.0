@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.util.ElapsedTime;
+
 /**
  * Class for the collection Mechanism code
  */
@@ -7,6 +9,7 @@ public class Collection {
 
     private Hardware robot;
     private boolean wristToggle = false;
+    private ElapsedTime wristTime;
 
     /**
      * sets up the hardware so you don't have to pass it as a parameter
@@ -14,6 +17,7 @@ public class Collection {
      */
     public Collection(Hardware r) {
         robot = r;
+        wristTime = new ElapsedTime();
     }
 
     /**
@@ -33,9 +37,13 @@ public class Collection {
                 robot.wrist.setTargetPosition(500);
                 robot.wrist.setPower(0.5);
             }
+            wristTime.reset();
         }
         else if(!toggle) {
             wristToggle = false;
+        }
+        if(wristTime.seconds() > 0.2 && robot.wrist.getCurrentPosition() > 470) {
+            robot.wrist.setPower(0);
         }
     }
 
@@ -70,7 +78,7 @@ public class Collection {
             robot.collectionSlide.setTargetPosition(0);
         }
         else {
-                robot.collectionSlide.setPower(0.1);
+            robot.collectionSlide.setPower(0.6);
             robot.collectionSlide.setTargetPosition(robot.collectionSlide.getCurrentPosition());
         }
     }
