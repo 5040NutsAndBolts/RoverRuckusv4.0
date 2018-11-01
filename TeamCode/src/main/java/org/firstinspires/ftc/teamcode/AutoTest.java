@@ -18,6 +18,7 @@ public class AutoTest extends LinearOpMode {
     public AutoTest() {
     }
 
+
     @Override
     public void runOpMode() {
         // Setting up detector
@@ -44,10 +45,14 @@ public class AutoTest extends LinearOpMode {
         while(robot.hangingMotor.getCurrentPosition() >= 30)
             lifter.lift(false, true);
         driveTrain.powerSet(0.75);
-        driveTrain.forwardInch(1);*/
-        driveTrain.sidewaysInch(-9);
+        driveTrain.forwardInch(1);
+        waitForDriveTrain();*/
+        driveTrain.sidewaysInch(9);
+        waitForDriveTrain("Right");
         //driveTrain.forwardInch(-1);
+        //waitForDriveTrain();
         driveTrain.rotate(-45);
+        waitForDriveTrain("Turn Left");
 
         /*
         If Gold isn't aligned
@@ -60,16 +65,47 @@ public class AutoTest extends LinearOpMode {
          */
         boolean goldAligned = false;
         while (!goldAligned) {
-            if (!detector.getAligned())
+            if (!detector.getAligned()) {
                 driveTrain.rotate(1);
-            else
+                waitForDriveTrain("Turn Right");
+            } else
                 goldAligned = true;
         }
-        driveTrain.sidewaysInch(-12);
+        driveTrain.sidewaysInch(12);
+        waitForDriveTrain("Right");
         driveTrain.rotate(180);
+        waitForDriveTrain("Turn Right");
         // Now needs to maneuver to drop the team marker
 
 
         detector.disable();
+    }
+
+
+    public void waitForDriveTrain(String direction){
+        if (direction=="Turn Right")
+            while(robot.leftDriveFront.getTargetPosition()+25>=robot.leftDriveFront.getCurrentPosition()
+                    && opModeIsActive())
+            {}
+        else if (direction=="Turn Left")
+            while(robot.leftDriveFront.getTargetPosition()-25>=robot.leftDriveFront.getCurrentPosition()
+                    && opModeIsActive())
+            {}
+        else if (direction=="Forward")
+            while(robot.leftDriveFront.getTargetPosition()-25>=robot.leftDriveFront.getCurrentPosition()
+                    && opModeIsActive())
+            {}
+        else if (direction=="Backwards")
+            while(robot.leftDriveFront.getTargetPosition()+25>=robot.leftDriveFront.getCurrentPosition()
+                    && opModeIsActive())
+            {}
+        else if (direction=="Left")
+            while(robot.leftDriveFront.getTargetPosition()-25>=robot.leftDriveFront.getCurrentPosition()
+                    && opModeIsActive())
+            {}
+        else if (direction=="Right")
+            while(robot.leftDriveFront.getTargetPosition()+20>=robot.leftDriveFront.getCurrentPosition()
+                    && opModeIsActive())
+            {}
     }
 }
