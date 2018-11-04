@@ -23,17 +23,6 @@ class AutoMethods extends LinearOpMode {
 
     }
 
-    public void motorSetupToPos(Hardware robot) {
-        robot.leftDriveFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.leftDriveFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        robot.rightDriveFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.rightDriveFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        robot.leftDriveRear.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.leftDriveRear.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        robot.rightDriveRear.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.rightDriveRear.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-    }
-
     public void gyroSetup(Hardware robot, HardwareMap hwMap) {
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
         parameters.angleUnit           = BNO055IMU.AngleUnit.DEGREES;

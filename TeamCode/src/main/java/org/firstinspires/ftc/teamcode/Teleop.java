@@ -23,6 +23,14 @@ public class Teleop extends OpMode {
     @Override
     public void init() {
         robot.init(hardwareMap);
+        robot.leftDriveFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.rightDriveFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.leftDriveRear.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.rightDriveRear.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.leftDriveRear.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.leftDriveFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.rightDriveRear.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.rightDriveFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
 
     @Override
@@ -51,6 +59,10 @@ public class Teleop extends OpMode {
         telemetry.addData("rear left drive", robot.leftDriveRear.getPower());
         telemetry.addData("front right drive", robot.rightDriveFront.getPower());
         telemetry.addData("rear right drive", robot.rightDriveRear.getPower());
+        telemetry.addData("front left pos", robot.leftDriveFront.getCurrentPosition());
+        telemetry.addData("rear left pos", robot.leftDriveRear.getCurrentPosition());
+        telemetry.addData("front right pos", robot.rightDriveFront.getCurrentPosition());
+        telemetry.addData("rear right pos", robot.rightDriveRear.getCurrentPosition());
         telemetry.addLine("--------HANGING MOTOR--------");
         telemetry.addData("hanging motor position", robot.hangingMotor.getCurrentPosition());
         telemetry.addData("hanging motor power", robot.hangingMotor.getPower());

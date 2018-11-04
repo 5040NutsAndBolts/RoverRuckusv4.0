@@ -53,6 +53,24 @@ public class MecanumDrive {
         robot.rightDriveRear.setPower(power);
     }
 
+    public double Diagonal(double angle, int inches) {
+        int fPos = inches*87;
+        int sPos = inches*129;
+
+        if(angle <45)
+            sPos = (int)Math.tan(angle)*87;
+        else
+            fPos = 129/(int)Math.atan(angle);
+
+        resetMotors();
+
+        robot.leftDriveFront.setTargetPosition(fPos-sPos);
+        robot.leftDriveRear.setTargetPosition(fPos+sPos);
+        robot.rightDriveFront.setTargetPosition(fPos+sPos);
+        robot.rightDriveRear.setTargetPosition(fPos-sPos);
+        return fPos/sPos; //ratio of max power level like teleop;
+    }
+
     /**
      * MT is Motor Ticks
      * 1 inch forward = 87 MT

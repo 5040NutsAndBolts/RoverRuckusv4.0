@@ -25,22 +25,22 @@ public class AutoPosTesting extends AutoMethods {
     @Override
     public void runOpMode() throws InterruptedException {
         robot.init(hardwareMap);
-        gyroSetup(robot, hardwareMap);
-        motorSetupToPos(robot);
+       // gyroSetup(robot, hardwareMap);
 
         while (!isStarted() && !isStopRequested()) {
-            telemetry.addData("gyro calibration", robot.gyro.isGyroCalibrated());
+            //telemetry.addData("gyro calibration", robot.gyro.isGyroCalibrated());
+            telemetry.addLine("good");
             telemetry.update();
         }
 
         driveTrain.powerSet(power);
-        driveTrain.rotate(90);
+        driveTrain.forwardSide(10,10);
 
         while(opModeIsActive()) {
             power += 0.05;
             driveTrain.powerSet(power);
 
-            telemetry.addData("gyro",robot.gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle);
+            //telemetry.addData("gyro",robot.gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle);
             telemetry.addData("Left Front Position", robot.leftDriveFront.getCurrentPosition());
             telemetry.addData("Left Rear Position", robot.leftDriveRear.getCurrentPosition());
             telemetry.addData("Right Front Position", robot.rightDriveFront.getCurrentPosition());
