@@ -5,15 +5,13 @@ import com.disnodeteam.dogecv.DogeCV;
 import com.disnodeteam.dogecv.detectors.roverrukus.GoldAlignDetector;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 @Autonomous(name="AutoTest", group="DogeCV")
 public class AutoTest extends LinearOpMode {
     private GoldAlignDetector detector;
     private Hardware robot;
     private MecanumDrive driveTrain;
-    private LiftMechanism lifter;
+    //private LiftMechanism lifter;
 
     public AutoTest() {
     }
@@ -36,7 +34,7 @@ public class AutoTest extends LinearOpMode {
         detector.ratioScorer.perfectRatio = 1.0;
         robot = new Hardware();
         driveTrain = new MecanumDrive(robot);
-        lifter = new LiftMechanism(robot);
+        //lifter = new LiftMechanism(robot);
         //==========\\
 
         //===Auto starts===\\
