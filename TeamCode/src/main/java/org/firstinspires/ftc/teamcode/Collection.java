@@ -29,21 +29,18 @@ public class Collection {
         if(toggle && !wristToggle) {
             wristToggle = true;
 
-            if(robot.wrist.getCurrentPosition() > 100) {
-                robot.wrist.setTargetPosition(0);
-                robot.wrist.setPower(1);
+            if(robot.wrist.getCurrentPosition() > 200) {
+                robot.wrist.setTargetPosition(100);
+                robot.wrist.setPower(0.5);
             }
             else {
-                robot.wrist.setTargetPosition(500);
-                robot.wrist.setPower(0.5);
+                robot.wrist.setTargetPosition(700);
+                robot.wrist.setPower(0.35);
             }
             wristTime.reset();
         }
         else if(!toggle) {
             wristToggle = false;
-        }
-        if(wristTime.seconds() > 0.2 && robot.wrist.getCurrentPosition() > 470) {
-            robot.wrist.setPower(0);
         }
     }
 

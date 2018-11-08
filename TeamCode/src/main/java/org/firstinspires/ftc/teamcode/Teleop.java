@@ -24,9 +24,9 @@ public class Teleop extends OpMode {
 
     public void init() {
         robot.init(hardwareMap);
-        robot.hangingMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.hangingMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        robot.init(hardwareMap);
+
+        robot.wrist.setPower(0.5);
+        robot.wrist.setTargetPosition(0);
     }
 
     public void loop() {
@@ -42,9 +42,9 @@ public class Teleop extends OpMode {
         double leftStickY2 = gamepad2.left_stick_y;
         boolean leftBumper2 = gamepad2.left_bumper;
         boolean rightBumper2 = gamepad2.right_bumper;
-        boolean a2 = gamepad2.a;
+        boolean x2 = gamepad2.x;
 
-        collection.wrist(a2);
+        collection.wrist(x2);
         collection.inTake(leftBumper2,rightBumper2);
         collection.slide(leftStickY2);
 
