@@ -7,17 +7,15 @@ public class MineralScorer{
 
     /**
      * this method extends the arm on the back of the robot out to the lander
-     * @param extend - value for if arm needs to extend
-     * @param retract - value for if arm needs to retract
      */
-    public void extendingArm(boolean extend, boolean retract, Hardware robot){
-        if (extend){
+    public void mineralLift(double rightStick, Hardware robot){
+        if (rightStick > .3){
             // While holding down the button to extend the arm, extend it to the max position
-            robot.depositMotor.setPower(1);
-            robot.depositMotor.setTargetPosition(1000);
-        } else if (retract) {
+            robot.depositMotor.setPower(.25);
+            robot.depositMotor.setTargetPosition(840);
+        } else if (rightStick < -.3) {
             // While holding down the button to retract the arm, retract to min position
-            robot.depositMotor.setPower(1);
+            robot.depositMotor.setPower(.25);
             robot.depositMotor.setTargetPosition(0);
         } else {
             // If the buttons aren't being held down then keep the arm at its current position
@@ -25,14 +23,14 @@ public class MineralScorer{
             if (robot.depositMotor.getCurrentPosition() < 20)
                 robot.depositMotor.setPower(0);
             else
-                robot.depositMotor.setPower(1);
+                robot.depositMotor.setPower(.25);
         }
     }
 
     /**
      * this method controls the bar that blocks minerals from falling into the lander
      * @param open - value for deciding if bar needs to move open
-     */
+     *//*
     public void mineralDropper(boolean open, Hardware robot){
         // If open, decide how far to open
         if (open){
@@ -45,5 +43,5 @@ public class MineralScorer{
         // else move to close position
         } else
             robot.blockingBar.setPosition(0);
-    }
+    }*/
 }
