@@ -12,19 +12,21 @@ public class Teleop extends OpMode {
     private Hardware robot;
     private MecanumDrive driveTrain;
     private LiftMechanism lifter;
+    private Collection collection;
     private boolean hangPressed = false;
 
     public Teleop() {
         robot = new Hardware();
         driveTrain = new MecanumDrive(robot);
         lifter = new LiftMechanism(robot);
+        collection = new Collection(robot);
     }
 
     public void init() {
         robot.init(hardwareMap);
-        robot.hangingMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.hangingMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        robot.init(hardwareMap);
+
+        robot.wrist.setPower(0.5);
+        robot.wrist.setTargetPosition(0);
     }
 
     public void loop() {
@@ -36,6 +38,15 @@ public class Teleop extends OpMode {
         boolean rightBumper1 = gamepad1.right_bumper;
         boolean dPadDown1 = gamepad1.dpad_down;
         boolean a1 = gamepad1.a;
+
+        double leftStickY2 = gamepad2.left_stick_y;
+        boolean leftBumper2 = gamepad2.left_bumper;
+        boolean rightBumper2 = gamepad2.right_bumper;
+        boolean x2 = gamepad2.x;
+
+        collection.wrist(x2);
+        collection.inTake(leftBumper2,rightBumper2);
+        collection.slide(leftStickY2);
 
         lifter.lift(leftBumper1, rightBumper1, dPadDown1);
         //lifter.resetLift(dPadDown1);
@@ -58,6 +69,13 @@ public class Teleop extends OpMode {
         telemetry.addLine("--------HANGING MOTOR--------");
         telemetry.addData("hanging motor position", robot.hangingMotor.getCurrentPosition());
         telemetry.addData("hanging motor power", robot.hangingMotor.getPower());
+        telemetry.addLine("--------COLLECTION WRIST--------");
+        telemetry.addData("wrist Position", robot.wrist.getCurrentPosition());
+        telemetry.addData("wrist Power", robot.wrist.getPower());
+        telemetry.addLine("--------COLLECTION SLIDE--------");
+        telemetry.addData("collection slide Position", robot.collectionSlide.getCurrentPosition());
+        telemetry.addData("collection slide power", robot.collectionSlide.getPower());
+        telemetry.addData("leftStickY2", leftStickY2);
         telemetry.update();
     }
 }
