@@ -42,13 +42,24 @@ public class MineralScorer{
         // If open, decide how far to open
         if (open){
             // Two color sensors, if at least one is gold, move bar to gold position
-            if (robot.rightColorSens.blue() <= 500 || robot.leftColorSens.blue() <= 500) // if gold
-                robot.blockingBar.setPosition(25);
+            if (robot.rightColorSens.blue() <= 100 || robot.leftColorSens.blue() <= 100) // if gold
+                robot.blockingBar.setPosition(0.4);
             // else move bar to silver position
             else
-                robot.blockingBar.setPosition(50);
+                robot.blockingBar.setPosition(1);
         // else move to close position
         } else
             robot.blockingBar.setPosition(0);
+    }
+
+    /*
+    1) When there are two minerals inside, the lift goes up
+    2) When the lift reaches the top, bar opens to drop minerals
+    3) When both minerals have been deposited, the lift goes down
+     */
+    public void simpleScoring(){
+        if(robot.rightColorSens.red() >=100 && robot.leftColorSens.red() >= 100) {
+
+        }
     }
 }

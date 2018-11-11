@@ -9,6 +9,7 @@ public class Teleop extends OpMode {
 
     private Hardware robot;
     private MineralScorer mineralScorer;
+    private boolean simpleScoring = false;
 
     public Teleop() {
         robot = new Hardware();
@@ -22,11 +23,17 @@ public class Teleop extends OpMode {
 
     @Override
     public void loop() {
-        // gets values from gamepad 1
         double rightStickY2 = gamepad2.right_stick_y;
 
-        mineralScorer.extendingArm(rightStickY2);
-        mineralScorer.mineralDropper(gamepad1.a);
+        if(gamepad1.y)
+            simpleScoring = !simpleScoring;
+
+        if (simpleScoring && gamepad1.a)
+            mineralScorer.simpleScoring();
+        else if (!simpleScoring){
+            mineralScorer.extendingArm(rightStickY2);
+            mineralScorer.mineralDropper(gamepad1.a);
+        }
 
         telemetry.addLine("-----EXTENDING ARM-----");
         telemetry.addData("Arm motor position", robot.depositMotor.getCurrentPosition());
