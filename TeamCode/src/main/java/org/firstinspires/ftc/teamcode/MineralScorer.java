@@ -5,17 +5,24 @@ package org.firstinspires.ftc.teamcode;
  */
 public class MineralScorer{
 
+    Hardware robot;
+
+    MineralScorer(Hardware r) {
+        robot = r;
+    }
+
     /**
      * this method extends the arm on the back of the robot out to the lander
+     * @param stick
      */
-    public void mineralLift(double rightStick, Hardware robot){
-        if (rightStick > .3){
+    public void extendingArm(double stick){
+        if (stick < -0.3){
             // While holding down the button to extend the arm, extend it to the max position
-            robot.depositMotor.setPower(.25);
+            robot.depositMotor.setPower(1);
             robot.depositMotor.setTargetPosition(840);
-        } else if (rightStick < -.3) {
+        } else if (stick > 0.3) {
             // While holding down the button to retract the arm, retract to min position
-            robot.depositMotor.setPower(.25);
+            robot.depositMotor.setPower(1);
             robot.depositMotor.setTargetPosition(0);
         } else {
             // If the buttons aren't being held down then keep the arm at its current position
@@ -23,15 +30,15 @@ public class MineralScorer{
             if (robot.depositMotor.getCurrentPosition() < 20)
                 robot.depositMotor.setPower(0);
             else
-                robot.depositMotor.setPower(.25);
+                robot.depositMotor.setPower(1);
         }
     }
 
     /**
      * this method controls the bar that blocks minerals from falling into the lander
      * @param open - value for deciding if bar needs to move open
-     *//*
-    public void mineralDropper(boolean open, Hardware robot){
+     */
+    public void mineralDropper(boolean open){
         // If open, decide how far to open
         if (open){
             // Two color sensors, if at least one is gold, move bar to gold position
@@ -43,5 +50,5 @@ public class MineralScorer{
         // else move to close position
         } else
             robot.blockingBar.setPosition(0);
-    }*/
+    }
 }
