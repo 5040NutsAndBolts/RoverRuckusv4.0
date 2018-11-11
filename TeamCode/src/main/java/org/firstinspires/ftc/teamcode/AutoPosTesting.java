@@ -26,7 +26,7 @@ public class AutoPosTesting extends AutoMethods {
     public void runOpMode() throws InterruptedException {
         robot.init(hardwareMap);
         //gyroSetup(robot, hardwareMap);
-        motorSetupToPos(robot);
+        //motorSetupToPos(robot);
 
         while (!isStarted() && !isStopRequested()) {
             //telemetry.addData("gyro calibration", robot.gyro.isGyroCalibrated());
@@ -35,7 +35,7 @@ public class AutoPosTesting extends AutoMethods {
         }
 
         driveTrain.powerSet(power);
-        driveTrain.forwardSide(10,10);
+        //driveTrain.forwardSide(10);
 
         while(opModeIsActive()) {
             power += 0.05;

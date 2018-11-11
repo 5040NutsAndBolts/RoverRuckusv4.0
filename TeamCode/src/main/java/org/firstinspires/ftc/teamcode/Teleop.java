@@ -41,17 +41,10 @@ public class Teleop extends OpMode {
         boolean leftBumper1 = gamepad1.left_bumper;
         boolean rightBumper1 = gamepad1.right_bumper;
         boolean a1 = gamepad1.a;
+        boolean dPadDown1 = gamepad1.dpad_down;
 
-        lifter.lift(leftBumper1, rightBumper1);
+        lifter.lift(leftBumper1, rightBumper1, dPadDown1);
         driveTrain.drive(leftStickY1, leftStickX1, rightStickX1);
-
-        //toggle for locking the hanging mechanism
-        if(a1 && !hangPressed) {
-            hangPressed = true;
-        }
-        else if (!a1){
-            hangPressed = false;
-        }
 
         telemetry.addLine("-------DRIVE MOTORS-------");
         telemetry.addData("front left drive", robot.leftDriveFront.getPower());
