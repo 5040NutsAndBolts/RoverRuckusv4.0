@@ -17,7 +17,7 @@ public class Hardware {
 
     HardwareMap hwMap;
 
-    public DcMotor depositMotor = null;
+    public DcMotor liftMotor = null;
     public Servo blockingBar = null;
     public ColorSensor leftColorSens = null;
     public ColorSensor rightColorSens = null;
@@ -38,11 +38,11 @@ public class Hardware {
     public void init(HardwareMap ahwMap, boolean auto) {
         // Save reference to Hardware map
         hwMap = ahwMap;
-        depositMotor = hwMap.dcMotor.get("depositMotor");
+        liftMotor = hwMap.dcMotor.get("depositMotor");
 
-        depositMotor.setDirection(DcMotor.Direction.REVERSE);
-        depositMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        depositMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        liftMotor.setDirection(DcMotor.Direction.REVERSE);
+        liftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         blockingBar = hwMap.servo.get("blockingBar");
         leftColorSens = hwMap.colorSensor.get("leftColorSens");
