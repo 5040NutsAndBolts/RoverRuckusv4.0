@@ -52,10 +52,10 @@ public class MecanumDrive {
 
     public void orientedDrive(double forward, double sideways, double rotation, boolean reset) {
 
-        double P = Math.hypot(-sideways, -forward);
+        double P = Math.hypot(sideways, forward);
         Orientation angles = robot.imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.RADIANS);
 
-        double robotAngle = Math.atan2(-forward, sideways);
+        double robotAngle = Math.atan2(forward, -sideways);
 
         if(reset) {
             adjust = angles.firstAngle;
