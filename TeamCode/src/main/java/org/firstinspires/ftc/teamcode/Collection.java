@@ -9,7 +9,7 @@ public class Collection {
 
     private Hardware robot;
     private boolean wristToggle = false;
-    private ElapsedTime wristTime;
+    private boolean wristDown = true;
 
     /**
      * sets up the hardware so you don't have to pass it as a parameter
@@ -17,7 +17,6 @@ public class Collection {
      */
     public Collection(Hardware r) {
         robot = r;
-        wristTime = new ElapsedTime();
     }
 
     /**
@@ -26,18 +25,33 @@ public class Collection {
      */
     public void wrist(boolean toggle) {
 
-        if(toggle && !wristToggle) {
+        if(robot.collectionSlide.getCurrentPosition()<20) {
+            robot.wrist.setTargetPosition(40);
+
+            if(robot.wrist.getCurrentPosition() >100)
+                robot.wrist.setPower(0.5);
+            else
+                robot.wrist.setPower(0.3);
+
+            wristDown = true;
+        }
+        else if(!wristDown) {
+            robot.wrist.setPower(0.5);
+            robot.wrist.setTargetPosition(340);
+        }
+        else {
+            robot.wrist.setTargetPosition(670);
+            robot.wrist.setPower(0.3);
+        }
+        if(toggle && !wristToggle && robot.collectionSlide.getCurrentPosition()>20) {
             wristToggle = true;
 
-            if(robot.wrist.getCurrentPosition() > 200) {
-                robot.wrist.setTargetPosition(100);
-                robot.wrist.setPower(0.5);
+            if(robot.wrist.getCurrentPosition() > 360) {
+                wristDown = false;
             }
             else {
-                robot.wrist.setTargetPosition(700);
-                robot.wrist.setPower(0.35);
+                wristDown = true;
             }
-            wristTime.reset();
         }
         else if(!toggle) {
             wristToggle = false;
@@ -56,6 +70,9 @@ public class Collection {
         else if(out) {
             robot.intake.setPower(0.5);
         }
+        /*else if(robot.collectionSlide.getCurrentPosition() <= 10) {
+            robot.intake.setPower(0.5);
+        }*/
         else{
             robot.intake.setPower(0);
         }
