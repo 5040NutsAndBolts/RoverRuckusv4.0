@@ -14,16 +14,20 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 public class Teleop extends OpMode {
 
     private Hardware robot;
+  
+    private MineralScorer mineralScorer;
+    private boolean simpleScoring = false;
+  
     private MecanumDrive driveTrain;
     private LiftMechanism lifter;
     private Collection collection;
-    private boolean hangPressed = false;
 
     public Teleop() {
         robot = new Hardware();
         driveTrain = new MecanumDrive(robot);
         lifter = new LiftMechanism(robot);
         collection = new Collection(robot);
+        mineralScorer = new MineralScorer(robot);
     }
 
     public void init() {
@@ -55,7 +59,11 @@ public class Teleop extends OpMode {
         boolean leftBumper2 = gamepad2.left_bumper;
         boolean rightBumper2 = gamepad2.right_bumper;
         boolean x2 = gamepad2.x;
+        boolean rightTrigger2 = gamepad2.right_trigger > 0.3;
 
+        mineralScorer.slide(x2);
+        mineralScorer.mineralBar(rightTrigger2);
+        
         collection.wrist(x2);
         collection.inTake(rightBumper2, leftBumper2);
         collection.slide(leftStickY2);
@@ -91,6 +99,12 @@ public class Teleop extends OpMode {
         telemetry.addData("collection slide Position", robot.collectionSlide.getCurrentPosition());
         telemetry.addData("collection slide power", robot.collectionSlide.getPower());
         telemetry.addData("leftStickY2", leftStickY2);
+        telemetry.addLine("-----SCORING SLIDE-----");
+        telemetry.addData("scoring slide position", robot.scoringSlide.getCurrentPosition());
+        telemetry.addData("scoring slide power", robot.scoringSlide.getPower());
+        telemetry.addLine("-----MINERAL DROP BAR-----");
+        telemetry.addData(" scoring bar position", robot.blockingBar.getPosition());
+        telemetry.update();
         telemetry.update();
     }
 }

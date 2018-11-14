@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.hardware.CRServo;
@@ -8,7 +9,6 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import org.firstinspires.ftc.robotcore.external.navigation.Position;
 import org.firstinspires.ftc.robotcore.external.navigation.Velocity;
-
 
 /**
  *This class is for setting up all the hardware components of the robot.
@@ -20,6 +20,12 @@ public class Hardware {
     public static final String MESSAGETAG = "5040MSG";
 
     HardwareMap hwMap;
+
+    //scoring mechanism
+    public DcMotor scoringSlide = null;
+    public Servo blockingBar = null;
+    public ColorSensor leftColorSens = null;
+    public ColorSensor rightColorSens = null;
 
     public CRServo intake = null;
     //drive train motors
@@ -50,6 +56,16 @@ public class Hardware {
     public void init(HardwareMap ahwMap) {
         // Save reference to Hardware map
         hwMap = ahwMap;
+      
+        scoringSlide = hwMap.dcMotor.get("scoringSlide");
+
+        scoringSlide.setDirection(DcMotor.Direction.REVERSE);
+        scoringSlide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        scoringSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        blockingBar = hwMap.servo.get("blockingBar");
+        leftColorSens = hwMap.colorSensor.get("leftColorSens");
+        rightColorSens = hwMap.colorSensor.get("rightColorSens");
 
         hangingMotor = hwMap.dcMotor.get("hangingMotor");
 
