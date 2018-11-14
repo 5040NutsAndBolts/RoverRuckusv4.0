@@ -1,10 +1,14 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.ColorSensor;
+import com.qualcomm.hardware.bosch.BNO055IMU;
+import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
-
+import org.firstinspires.ftc.robotcore.external.navigation.Position;
+import org.firstinspires.ftc.robotcore.external.navigation.Velocity;
 
 /**
  *This class is for setting up all the hardware components of the robot.
@@ -17,10 +21,25 @@ public class Hardware {
 
     HardwareMap hwMap;
 
+    //scoring mechanism
     public DcMotor scoringSlide = null;
     public Servo blockingBar = null;
     public ColorSensor leftColorSens = null;
     public ColorSensor rightColorSens = null;
+
+    public CRServo intake = null;
+    //drive train motors
+    public DcMotor leftDriveFront = null;
+    public DcMotor rightDriveFront = null;
+    public DcMotor leftDriveRear = null;
+    public DcMotor rightDriveRear = null;
+
+    public DcMotor hangingMotor = null;
+
+    public DcMotor collectionSlide = null;
+    public DcMotor wrist = null;
+
+    public BNO055IMU imu;
 
     /**
      * Constructor to set up the Hardwaremap
@@ -33,12 +52,12 @@ public class Hardware {
      *Method for initializing all the hardware components.
      *Use at the beginning of code initialization
      * @param ahwMap the hardware declaration being passed into this class
-     * @param auto boolean to run initializations for auto
      */
-    public void init(HardwareMap ahwMap, boolean auto) {
+    public void init(HardwareMap ahwMap) {
         // Save reference to Hardware map
         hwMap = ahwMap;
-        scoringSlide = hwMap.dcMotor.get("depositMotor");
+      
+        scoringSlide = hwMap.dcMotor.get("scoringSlide");
 
         scoringSlide.setDirection(DcMotor.Direction.REVERSE);
         scoringSlide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -47,5 +66,45 @@ public class Hardware {
         blockingBar = hwMap.servo.get("blockingBar");
         leftColorSens = hwMap.colorSensor.get("leftColorSens");
         rightColorSens = hwMap.colorSensor.get("rightColorSens");
+
+        hangingMotor = hwMap.dcMotor.get("hangingMotor");
+
+        hangingMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        hangingMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        //drive train motor setup
+        leftDriveFront = hwMap.dcMotor.get("leftDriveFront");
+        leftDriveRear = hwMap.dcMotor.get("leftDriveRear");
+        rightDriveFront = hwMap.dcMotor.get("rightDriveFront");
+        rightDriveRear = hwMap.dcMotor.get("rightDriveRear");
+        //reversing the right side motors
+        rightDriveFront.setDirection(DcMotor.Direction.REVERSE);
+        rightDriveRear.setDirection(DcMotor.Direction.REVERSE);
+
+        //collection motors
+        collectionSlide = hwMap.dcMotor.get("collectionSlide");
+        wrist = hwMap.dcMotor.get("wrist");
+
+        wrist.setDirection(DcMotor.Direction.REVERSE);
+        wrist.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        wrist.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        collectionSlide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        collectionSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        intake = hwMap.crservo.get("intake");
+
+
+        BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
+        parameters.angleUnit           = BNO055IMU.AngleUnit.DEGREES;
+        parameters.accelUnit           = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
+        parameters.calibrationDataFile = "AdafruitIMUCalibration.json"; // see the calibration sample opmode
+        parameters.loggingEnabled      = true;
+        parameters.loggingTag          = "IMU";
+        parameters.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
+
+        this.imu = hwMap.get(BNO055IMU.class, "imu");
+        this.imu.initialize(parameters);
+        imu.startAccelerationIntegration(new Position(), new Velocity(), 1000);
+
     }
 }
