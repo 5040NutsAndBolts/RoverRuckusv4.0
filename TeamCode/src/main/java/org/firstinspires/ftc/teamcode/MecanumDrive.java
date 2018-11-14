@@ -1,9 +1,9 @@
 package org.firstinspires.ftc.teamcode;
 
-import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
-import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
-import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
-import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 import static java.lang.Math.abs;
 
@@ -25,9 +25,9 @@ public class MecanumDrive {
 
     /**
      * this method is for driving the mecanum with the three inputs
-     * @param forward - the forward value input
-     * @param sideways - the sideways value input
-     * @param rotation - the rotation value input
+     * @param forward - The motor power to move forwards by
+     * @param sideways - The motor power to move sideways by
+     * @param rotation - the motor power to rotate by
      */
     public void drive(double forward, double sideways, double rotation) {
 

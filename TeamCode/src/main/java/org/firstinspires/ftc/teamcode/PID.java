@@ -73,12 +73,10 @@ public class PID {
 	 *  Derivative Method
 	 *
 	 *  @param  error -- the current error in the system
-	 *  
 	 *  @return the value with which to correct the system
 	 */
 	private double derivative (double error) {
-      // return (KD / (2 * Math.PI)) * (error - lastError);
-      return 0;
+      return (KD / (2 * Math.PI)) * (error - lastError);
    }
 
 	/**

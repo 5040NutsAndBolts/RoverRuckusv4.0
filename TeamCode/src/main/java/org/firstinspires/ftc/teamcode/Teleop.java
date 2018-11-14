@@ -26,6 +26,7 @@ public class Teleop extends OpMode {
         collection = new Collection(robot);
     }
 
+    @Override
     public void init() {
         robot.init(hardwareMap);
 
