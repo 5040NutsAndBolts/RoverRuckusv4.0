@@ -8,15 +8,20 @@ import android.graphics.Color;
 public class MineralScorer{
 
     Hardware robot;
+
+    private boolean scoringToggle = false;
+    private  boolean barToggle = false;
+    private int barPlace = 0;
+
     public static LeftColorSens liftLeftColor = LeftColorSens.NONE;
     public static RightColorSens liftRightColor = RightColorSens.NONE;
 
     public enum LeftColorSens {
-        NONE, GOLD, SILVER;
+        NONE, GOLD, SILVER
     }
 
     public enum RightColorSens {
-        NONE, GOLD, SILVER;
+        NONE, GOLD, SILVER
     }
 
     MineralScorer(Hardware r) {
@@ -25,24 +30,70 @@ public class MineralScorer{
 
     /**
      * this method extends the arm on the back of the robot out to the lander
-     * @param stick
+     * @param //stick
      */
-    public void extendingArm(double stick){
-        if (stick < -0.3){
+    public void slide(boolean toggle){
+
+        if(toggle && !scoringToggle) {
+            scoringToggle = true;
+
+            if(robot.scoringSlide.getCurrentPosition() < 20) {
+                robot.scoringSlide.setTargetPosition(840);
+                robot.scoringSlide.setPower(1);
+            }
+            else {
+                robot.scoringSlide.setTargetPosition(0);
+                robot.scoringSlide.setPower(0.8);
+            }
+        }
+        else if(!toggle) {
+            scoringToggle = false;
+        }
+        if(robot.scoringSlide.getCurrentPosition() <= 20 && robot.scoringSlide.getTargetPosition() == 0) {
+            robot.scoringSlide.setPower(0);
+        }
+
+
+        /*if (stick < -0.3){
             // While holding down the button to extend the arm, extend it to the max position
-            robot.liftMotor.setPower(1);
-            robot.liftMotor.setTargetPosition(840);
+            robot.scoringSlide.setPower(1);
+            robot.scoringSlide.setTargetPosition(840);
         } else if (stick > 0.3) {
             // While holding down the button to retract the arm, retract to min position
-            robot.liftMotor.setPower(1);
-            robot.liftMotor.setTargetPosition(0);
+            robot.scoringSlide.setPower(1);
+            robot.scoringSlide.setTargetPosition(0);
         } else {
             // If the buttons aren't being held down then keep the arm at its current position
-            robot.liftMotor.setTargetPosition(robot.liftMotor.getCurrentPosition());
-            if (robot.liftMotor.getCurrentPosition() < 20)
-                robot.liftMotor.setPower(0);
+            robot.scoringSlide.setTargetPosition(robot.scoringSlide.getCurrentPosition());
+            if (robot.scoringSlide.getCurrentPosition() < 20)
+                robot.scoringSlide.setPower(0);
             else
-                robot.liftMotor.setPower(1);
+                robot.scoringSlide.setPower(1);
+        }*/
+    }
+
+    /**
+     * TEMPORARY UNTIL WE CAN GET COLOR SENSORS WORKING
+     * @param open
+     */
+    public void mineralBar(boolean open) {
+        if(open && barPlace==0 && !barToggle) {
+            barToggle = true;
+            barPlace = 1;
+            robot.blockingBar.setPosition(0.4);
+        }
+        else if(open && barPlace==1 && !barToggle) {
+            barToggle = true;
+            barPlace = 2;
+            robot.blockingBar.setPosition(1);
+        }
+        else if(open && barPlace==2 && !barToggle) {
+            barToggle = true;
+            barPlace = 0;
+            robot.blockingBar.setPosition(0);
+        }
+        else if(!open && barToggle) {
+            barToggle = false;
         }
     }
 
@@ -72,13 +123,30 @@ public class MineralScorer{
     public void simpleScoring(){
         if ((liftRightColor==liftRightColor.GOLD || liftRightColor==liftRightColor.SILVER) &&
                 (liftLeftColor==liftLeftColor.GOLD || liftLeftColor==liftLeftColor.SILVER)) {
-            robot.liftMotor.setPower(1);
-            robot.liftMotor.setTargetPosition(840);
-            while (robot.liftMotor.getCurrentPosition()<= 830){}
+            robot.scoringSlide.setPower(1);
+            robot.scoringSlide.setTargetPosition(840);
+            while (robot.scoringSlide.getCurrentPosition()<= 830){}
             while ((liftRightColor==liftRightColor.GOLD || liftRightColor==liftRightColor.SILVER) ||
                     (liftLeftColor==liftLeftColor.GOLD || liftLeftColor==liftLeftColor.SILVER))
                 mineralDropper(true);
 
         }
+    }
+    public void scoreColorSet(){
+        // Sets the left color sensor enum value
+        if (robot.leftColorSens.red() >= 100) {
+            MineralScorer.liftLeftColor = MineralScorer.LeftColorSens.GOLD;
+            if (robot.leftColorSens.red() >= 250)
+                MineralScorer.liftLeftColor = MineralScorer.LeftColorSens.SILVER;
+        } else
+            MineralScorer.liftLeftColor = MineralScorer.LeftColorSens.NONE;
+
+        // Sets the right color sensor enum value
+        if (robot.rightColorSens.red() >= 100) {
+            MineralScorer.liftRightColor = MineralScorer.RightColorSens.GOLD;
+            if (robot.leftColorSens.red() >= 250)
+                MineralScorer.liftRightColor = MineralScorer.RightColorSens.SILVER;
+        } else
+            MineralScorer.liftRightColor = MineralScorer.RightColorSens.NONE;
     }
 }
